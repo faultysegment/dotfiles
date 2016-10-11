@@ -1,8 +1,14 @@
 localfiles = .tmux.conflocal .vimrclocal .bashrclocal
 files = .tmux.conf .vimrc .bashrc
 
-all: $(files)
+all : colorschemes
+
+.PHONY = colorschemes
+colorschemes : $(files)
+		cp colors/* ~/.vim/colors/
+
 $(localfiles): % :
-	touch ~/$@
+		touch ~/$@
+
 $(files): % : %local
-	cp --remove-destination $@ ~/
+		cp --remove-destination $@ ~/
