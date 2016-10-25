@@ -123,6 +123,7 @@ if ! shopt -oq posix; then
   fi
 fi
 alias up='source ~/.bashrc'
+alias lrc='vim ~/.bashrclocal'
 alias rc='vim ~/.bashrc'
 alias fuck='sudo $(history -p \!\!)'
 alias ssh_socks_proxy='ssh -D 8888  -f -N'
