@@ -30,6 +30,7 @@ Plugin 'https://github.com/Valloric/YouCompleteMe'
 map <C-]> :YcmCompleter GoTo<CR>
 let g:ycm_collect_identifiers_from_tags_files = 1
 set tags+=./.tags
+Plugin 'rdnetto/YCM-Generator'
 "Plugin 'szw/vim-tags' "ctags
 "------------------=== Other ===----------------------
 Plugin 'bling/vim-airline'       " Lean & mean status/tabline for vim
