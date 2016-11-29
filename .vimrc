@@ -10,6 +10,7 @@ set expandtab
 set noswapfile
 set list
 set listchars=trail:.,tab:>>
+set hls
 syntax on
 filetype indent plugin on
 
