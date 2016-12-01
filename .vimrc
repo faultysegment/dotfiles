@@ -1,5 +1,4 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
 set clipboard=unnamedplus
 set mouse=a
 set nu
@@ -28,9 +27,6 @@ Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
 Plugin 'scrooloose/nerdtree'     " Project and file navigation
 Plugin 'majutsushi/tagbar'          " Class/module browser
 Plugin 'https://github.com/Valloric/YouCompleteMe'
-map <C-]> :YcmCompleter GoTo<CR>
-let g:ycm_collect_identifiers_from_tags_files = 1
-set tags+=./.tags
 Plugin 'rdnetto/YCM-Generator'
 "Plugin 'szw/vim-tags' "ctags
 "------------------=== Other ===----------------------
@@ -43,6 +39,9 @@ Plugin 'nvie/vim-flake8' "pep8
 Plugin 'flazz/vim-colorschemes'
 
 call vundle#end()            		" required
+map <C-[> :YcmCompleter GoTo<CR>
+let g:ycm_collect_identifiers_from_tags_files = 1
+set tags+=./.tags
 set colorcolumn=80
 filetype on
 filetype plugin on
@@ -132,22 +131,6 @@ function! DoPrettyXML()
 endfunction
 
 command! PrettyXML call DoPrettyXML()
-if has('cscope')
-  set cscopetag cscopeverbose
-
-  if has('quickfix')
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
-  endif
-
-  cnoreabbrev csa cs add
-  cnoreabbrev csf cs find
-  cnoreabbrev csk cs kill
-  cnoreabbrev csr cs reset
-  cnoreabbrev css cs show
-  cnoreabbrev csh cs help
-
-  command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
-endif
 set t_Co=256
 colorscheme monokain
 
