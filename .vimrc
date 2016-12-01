@@ -39,7 +39,8 @@ Plugin 'nvie/vim-flake8' "pep8
 Plugin 'flazz/vim-colorschemes'
 
 call vundle#end()            		" required
-map <C-[> :YcmCompleter GoTo<CR>
+map <C-]> :YcmCompleter GoTo<CR>
+autocmd FileType python unmap <C-]>
 let g:ycm_collect_identifiers_from_tags_files = 1
 set tags+=./.tags
 set colorcolumn=80
