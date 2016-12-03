@@ -22,26 +22,50 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
-
-"---------=== Code/project navigation ===-------------
 Plugin 'scrooloose/nerdtree'     " Project and file navigation
 Plugin 'majutsushi/tagbar'          " Class/module browser
+Plugin 'https://github.com/sheerun/vim-polyglot'
+Plugin 'https://github.com/vim-syntastic/syntastic'
+Plugin 'https://github.com/SirVer/ultisnips'
 Plugin 'https://github.com/Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
-"Plugin 'szw/vim-tags' "ctags
-"------------------=== Other ===----------------------
 Plugin 'bling/vim-airline'       " Lean & mean status/tabline for vim
-Plugin 'rosenfeld/conque-term'      " Consoles as buffers
 Plugin 'tpope/vim-surround' "Parentheses, brackets, quotes, XML tags, and more
-"---------------=== Languages support ===-------------
-"----------=== Python ===--------------
-Plugin 'nvie/vim-flake8' "pep8
 Plugin 'flazz/vim-colorschemes'
 
 call vundle#end()            		" required
-map <C-]> :YcmCompleter GoTo<CR>
-autocmd FileType python unmap <C-]>
-let g:ycm_collect_identifiers_from_tags_files = 1
+" ---------------------------------- "
+" Configure NERDTree
+" ---------------------------------- "
+
+" Open NERDTree when Vim startsup and no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Open NERDTree with Ctrl-n 
+map <C-n> :NERDTreeToggle<CR>
+
+" Close Vim if the only window left open is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" ---------------------------------- "
+" Configure Ultisnip and YouCompleteMe
+" ---------------------------------- "
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" ---------------------------------- "
+" Configure YouCompleteMe
+" ---------------------------------- "
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+" Goto definition with F3
+map <F3> :YcmCompleter GoTo<CR>
+
 set tags+=./.tags
 set colorcolumn=80
 filetype on
@@ -66,7 +90,6 @@ endfunction
 set pastetoggle=<F10>
 map <F9> mz:execute TabToggle()<CR>'z
 nmap <F8> :TagbarToggle<CR>
-map <C-n> :NERDTreeToggle<CR>
 source ~/.vimrclocal
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
