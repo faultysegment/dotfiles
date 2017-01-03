@@ -5,6 +5,7 @@ all : colorschemes
 
 .PHONY = colorschemes
 colorschemes : $(files)
+		mkdir -p ~/.vim/colors/
 		cp colors/* ~/.vim/colors/
 
 $(localfiles): % :
