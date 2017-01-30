@@ -31,6 +31,7 @@ Plugin 'https://github.com/Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'       " Lean & mean status/tabline for vim
 Plugin 'tpope/vim-surround' "Parentheses, brackets, quotes, XML tags, and more
 Plugin 'flazz/vim-colorschemes'
+Plugin 'https://github.com/rakr/vim-one'
 
 call vundle#end()            		" required
 " ---------------------------------- "
@@ -156,5 +157,7 @@ endfunction
 
 command! PrettyXML call DoPrettyXML()
 set t_Co=256
-colorscheme monokain
+colorscheme one
+set background=dark
+let g:airline_theme='one'
 
