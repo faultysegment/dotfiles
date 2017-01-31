@@ -1,15 +1,16 @@
 localfiles = .tmux.conflocal .vimrclocal .bashrclocal
-files = .tmux.conf .vimrc .bashrc
+files = .tmux.conf .vimrc .bashrc 
+all_files = $(files) $(localfiles) init.vim
 
-all : colorschemes
+all : $(all_files) 
 
-.PHONY = colorschemes
-colorschemes : $(files)
-		mkdir -p ~/.vim/colors/
-		cp colors/* ~/.vim/colors/
-
-$(localfiles): % :
+$(localfiles): FORCE
 		touch ~/$@
 
-$(files): % : %local
+$(files): FORCE
 		cp --remove-destination $@ ~/
+
+init.vim: FORCE
+		mkdir -p ~/.config/nvim/
+		cp --remove-destination $@ ~/.config/nvim/
+FORCE:
