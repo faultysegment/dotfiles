@@ -20,33 +20,26 @@ filetype indent plugin on
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
-Plugin 'scrooloose/nerdtree'     " Project and file navigation
-Plugin 'majutsushi/tagbar'          " Class/module browser
+Plugin 'gmarik/Vundle.vim' 
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
 Plugin 'https://github.com/sheerun/vim-polyglot'
 Plugin 'https://github.com/vim-syntastic/syntastic'
 Plugin 'https://github.com/SirVer/ultisnips'
 Plugin 'https://github.com/Valloric/YouCompleteMe'
-Plugin 'bling/vim-airline'       " Lean & mean status/tabline for vim
-Plugin 'tpope/vim-surround' "Parentheses, brackets, quotes, XML tags, and more
+Plugin 'fatih/vim-go'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-surround'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'https://github.com/rakr/vim-one'
-
 call vundle#end()            		" required
 " ---------------------------------- "
 " Configure NERDTree
 " ---------------------------------- "
 
-" Open NERDTree when Vim startsup and no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
 " Open NERDTree with Ctrl-n 
 map <C-n> :NERDTreeToggle<CR>
 
-" Close Vim if the only window left open is NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " ---------------------------------- "
 " Configure Ultisnip and YouCompleteMe
 " ---------------------------------- "
@@ -64,8 +57,29 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+
+ "use goimports for formatting
+ let g:go_fmt_command = "goimports"
+
+ " turn highlighting on
+ let g:go_highlight_functions = 1
+ let g:go_highlight_methods = 1
+ let g:go_highlight_structs = 1
+ let g:go_highlight_operators = 1
+ let g:go_highlight_build_constraints = 1
+
+ let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
+
 " Goto definition with F3
-map <F3> :YcmCompleter GoTo<CR>
+" Call YCM GoTo or vim-go GoTo depending on file type. 
+function! GoToDef()
+    if &ft == 'go'
+        execute 'GoDef'
+    else
+        execute 'YcmCompleter GoTo'
+    endif
+endfunction
+nnoremap <F3> :call GoToDef()<CR>
 
 set tags+=./.tags
 set colorcolumn=80
