@@ -59,7 +59,7 @@ let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 
  "use goimports for formatting
- let g:go_fmt_command = "goimports"
+ let g:go_fmt_command = "gofmt"
 
  " turn highlighting on
  let g:go_highlight_functions = 1
