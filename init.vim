@@ -60,7 +60,7 @@ let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
-au BufWrite * :Autoformat
+au BufWrite *cpp,*h :Autoformat
 
 "use goimports for formatting
 let g:go_fmt_command = "gofmt"
