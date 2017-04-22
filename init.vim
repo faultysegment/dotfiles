@@ -85,7 +85,7 @@ function! GoToDef()
 endfunction
 nnoremap <F3> :call GoToDef()<CR>
 
-set tags+=./.tags
+set tags+=./tags
 set colorcolumn=80
 filetype on
 filetype plugin on
