@@ -13,33 +13,82 @@ set hls
 syntax on
 filetype indent plugin on
 
-"-----------------------------------------------------------------------
-"=====================================================
-" Vundle settings
-"=====================================================
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'https://github.com/sheerun/vim-polyglot'
-Plugin 'https://github.com/vim-syntastic/syntastic'
-Plugin 'https://github.com/SirVer/ultisnips'
-Plugin 'https://github.com/Valloric/YouCompleteMe'
-Plugin 'fatih/vim-go'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-surround'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'https://github.com/rakr/vim-one'
-Plugin 'Chiel92/vim-autoformat'
-call vundle#end()					" required
+"dein Scripts
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=~/.vim/bundle/./dein.vim/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('~/.vim/bundle/./dein.vim')
+  call dein#begin('~/.vim/bundle/./dein.vim')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('~/.vim/bundle/./dein.vim/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  call dein#add('c0r73x/neotags.nvim')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('https://github.com/sheerun/vim-polyglot')
+  call dein#add('https://github.com/vim-syntastic/syntastic')
+  call dein#add('https://github.com/SirVer/ultisnips')
+  call dein#add('fatih/vim-go')
+  call dein#add('bling/vim-airline')
+  call dein#add('tpope/vim-surround')
+  call dein#add('flazz/vim-colorschemes')
+  call dein#add('https://github.com/rakr/vim-one')
+  call dein#add('Chiel92/vim-autoformat')
+  call dein#add('cazador481/fakeclip.neovim')
+  call dein#add('roxma/nvim-completion-manager')
+  call dein#add('roxma/clang_complete')
+  call dein#add('arakashic/chromatica.nvim')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+"End dein Scripts-------------------------
+
 " ---------------------------------- "
 " Configure NERDTree
 " ---------------------------------- "
 
 " Open NERDTree with Ctrl-n
 map <C-n> :NERDTreeToggle<CR>
+" Neotags
+let g:neotags_enabled=1
+
+" Chromatica
+let g:chromatica#enable_at_startup=1
+" If chromatica failed update this path
+let g:chromatica#libclang_path='/usr/lib/llvm-3.8/lib/libclang.so.1'
+
+" <Plug>(clang_complete_goto_declaration_preview)
+au FileType c,cpp  nmap gd <Plug>(clang_complete_goto_declaration)
+
+" Autocomplete
+" don't give |ins-completion-menu| messages.  For example,
+" '-- XXX completion (YYY)', 'match 1 of 2', 'The only match',
+set shortmess+=c
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" fakeclip
+let g:vim_fakeclip_tmux_plus=1 
 
 " ---------------------------------- "
 " Configure Ultisnip and YouCompleteMe
@@ -47,18 +96,6 @@ map <C-n> :NERDTreeToggle<CR>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-" ---------------------------------- "
-" Configure YouCompleteMe
-" ---------------------------------- "
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-let g:ycm_complete_in_comments = 1 " Completion in comments
-let g:ycm_complete_in_strings = 1 " Completion in string
-
-let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 au BufWrite *cpp,*h :Autoformat
 
@@ -80,7 +117,7 @@ function! GoToDef()
 	if &ft == 'go'
 		execute 'GoDef'
 	else
-		execute 'YcmCompleter GoTo'
+        "
 	endif
 endfunction
 nnoremap <F3> :call GoToDef()<CR>
