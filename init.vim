@@ -30,7 +30,8 @@ if dein#load_state('~/.vim/bundle/./dein.vim')
   call dein#add('~/.vim/bundle/./dein.vim/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
-  call dein#add('c0r73x/neotags.nvim')
+  call dein#add('autozimu/LanguageClient-neovim')
+  call dein#add('Shougo/deoplete.nvim')
   call dein#add('scrooloose/nerdtree')
   call dein#add('majutsushi/tagbar')
   call dein#add('https://github.com/sheerun/vim-polyglot')
@@ -44,7 +45,6 @@ if dein#load_state('~/.vim/bundle/./dein.vim')
   call dein#add('Chiel92/vim-autoformat')
   call dein#add('cazador481/fakeclip.neovim')
   call dein#add('roxma/nvim-completion-manager')
-  call dein#add('roxma/clang_complete')
   call dein#add('arakashic/chromatica.nvim')
 
   " Required:
