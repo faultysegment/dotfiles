@@ -1,5 +1,5 @@
 set nocompatible              " be iMproved, required
-set clipboard=unnamedplus
+set clipboard=
 set mouse=a
 set nu
 set smartindent
@@ -30,11 +30,10 @@ if dein#load_state('~/.vim/bundle/./dein.vim')
   call dein#add('~/.vim/bundle/./dein.vim/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
-  call dein#add('autozimu/LanguageClient-neovim')
-  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Valloric/YouCompleteMe')
   call dein#add('scrooloose/nerdtree')
   call dein#add('majutsushi/tagbar')
-  call dein#add('https://github.com/sheerun/vim-polyglot')
+  call dein#add('sheerun/vim-polyglot')
   call dein#add('https://github.com/vim-syntastic/syntastic')
   call dein#add('https://github.com/SirVer/ultisnips')
   call dein#add('fatih/vim-go')
@@ -44,9 +43,8 @@ if dein#load_state('~/.vim/bundle/./dein.vim')
   call dein#add('https://github.com/rakr/vim-one')
   call dein#add('Chiel92/vim-autoformat')
   call dein#add('cazador481/fakeclip.neovim')
-  call dein#add('roxma/nvim-completion-manager')
   call dein#add('arakashic/chromatica.nvim')
-
+  call dein#add('OmniSharp/omnisharp-vim.git')
   " Required:
   call dein#end()
   call dein#save_state()
@@ -68,27 +66,11 @@ endif
 
 " Open NERDTree with Ctrl-n
 map <C-n> :NERDTreeToggle<CR>
-" Neotags
-let g:neotags_enabled=1
 
 " Chromatica
 let g:chromatica#enable_at_startup=1
 " If chromatica failed update this path
 let g:chromatica#libclang_path='/usr/lib/llvm-3.8/lib/libclang.so.1'
-
-" <Plug>(clang_complete_goto_declaration_preview)
-au FileType c,cpp  nmap gd <Plug>(clang_complete_goto_declaration)
-
-" Autocomplete
-" don't give |ins-completion-menu| messages.  For example,
-" '-- XXX completion (YYY)', 'match 1 of 2', 'The only match',
-set shortmess+=c
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" fakeclip
-let g:vim_fakeclip_tmux_plus=1 
 
 " ---------------------------------- "
 " Configure Ultisnip and YouCompleteMe
@@ -117,7 +99,7 @@ function! GoToDef()
 	if &ft == 'go'
 		execute 'GoDef'
 	else
-        "
+ 		execute 'YcmCompleter GoTo'
 	endif
 endfunction
 nnoremap <F3> :call GoToDef()<CR>
