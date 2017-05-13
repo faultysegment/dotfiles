@@ -10,5 +10,5 @@ $(homefiles): FORCE
 init.vim: FORCE
 		mkdir -p ~/.config/nvim/
 		cp --remove-destination $@ ~/.config/nvim/
-		touch ~/.config/nvim/$@.local
+		cat ~/.config/nvim/$@.local >> ~/.config/nvim/init.vim
 FORCE:
