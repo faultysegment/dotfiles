@@ -21,44 +21,35 @@ endif
 " Required:
 set runtimepath+=~/.vim/bundle/./dein.vim/repos/github.com/Shougo/dein.vim
 
+"=====================================================
+" Vundle settings
+"=====================================================
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 " Required:
-if dein#load_state('~/.vim/bundle/./dein.vim')
-  call dein#begin('~/.vim/bundle/./dein.vim')
-
-  " Let dein manage dein
-  " Required:
-  call dein#add('~/.vim/bundle/./dein.vim/repos/github.com/Shougo/dein.vim')
-
+Plugin 'gmarik/Vundle.vim'
   " Add or remove your plugins here:
-  call dein#add('Valloric/YouCompleteMe')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('majutsushi/tagbar')
-  call dein#add('sheerun/vim-polyglot')
-  call dein#add('https://github.com/vim-syntastic/syntastic')
-  call dein#add('https://github.com/SirVer/ultisnips')
-  call dein#add('fatih/vim-go')
-  call dein#add('bling/vim-airline')
-  call dein#add('tpope/vim-surround')
-  call dein#add('flazz/vim-colorschemes')
-  call dein#add('https://github.com/rakr/vim-one')
-  call dein#add('Chiel92/vim-autoformat')
-  call dein#add('cazador481/fakeclip.neovim')
-  call dein#add('arakashic/chromatica.nvim')
-  call dein#add('OmniSharp/omnisharp-vim.git')
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'https://github.com/vim-syntastic/syntastic'
+Plugin 'https://github.com/SirVer/ultisnips'
+Plugin 'fatih/vim-go'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-surround'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'https://github.com/rakr/vim-one'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'cazador481/fakeclip.neovim'
+Plugin 'arakashic/chromatica.nvim'
+Plugin 'OmniSharp/omnisharp-vim.git'
   " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-
+call vundle#end()
 " Required:
 filetype plugin indent on
 syntax enable
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-"End dein Scripts-------------------------
 
 " ---------------------------------- "
 " Configure NERDTree
@@ -155,7 +146,6 @@ let g:tagbar_type_go = {
 			\ 'ctagsbin'  : 'gotags',
 			\ 'ctagsargs' : '-sort -silent'
 			\ }
-source ~/.config/nvim/init.vim.local
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
