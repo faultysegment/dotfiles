@@ -44,7 +44,10 @@ Plugin 'https://github.com/rakr/vim-one'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'cazador481/fakeclip.neovim'
 Plugin 'arakashic/chromatica.nvim'
+Plugin 'tpope/vim-dispatch'
+Plugin 'radenling/vim-dispatch-neovim'
 Plugin 'OmniSharp/omnisharp-vim.git'
+Plugin 'bogado/file-line'
   " Required:
 call vundle#end()
 " Required:
