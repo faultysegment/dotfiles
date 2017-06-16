@@ -18,9 +18,6 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=~/.vim/bundle/./dein.vim/repos/github.com/Shougo/dein.vim
-
 "=====================================================
 " Vundle settings
 "=====================================================
@@ -48,6 +45,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'radenling/vim-dispatch-neovim'
 Plugin 'OmniSharp/omnisharp-vim.git'
 Plugin 'bogado/file-line'
+Plugin 'davidhalter/jedi-vim'
   " Required:
 call vundle#end()
 " Required:
