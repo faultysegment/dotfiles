@@ -1,4 +1,4 @@
-homefiles = .tmux.conf .bashrc 
+homefiles = .tmux.conf .bashrc .vimrc 
 all_files = $(homefiles) init.vim
 
 all : $(all_files) 
