@@ -18,36 +18,34 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-"=====================================================
-" Vundle settings
-"=====================================================
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" Required:
-Plugin 'gmarik/Vundle.vim'
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+Plug 'gmarik/Vundle.vim'
   " Add or remove your plugins here:
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'https://github.com/vim-syntastic/syntastic'
-Plugin 'https://github.com/SirVer/ultisnips'
-Plugin 'fatih/vim-go'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-surround'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'https://github.com/rakr/vim-one'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'cazador481/fakeclip.neovim'
-Plugin 'arakashic/chromatica.nvim'
-Plugin 'tpope/vim-dispatch'
-Plugin 'radenling/vim-dispatch-neovim'
-Plugin 'OmniSharp/omnisharp-vim.git'
-Plugin 'bogado/file-line'
-Plugin 'davidhalter/jedi-vim'
-  " Required:
-call vundle#end()
+Plug 'Valloric/YouCompleteMe'
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'sheerun/vim-polyglot'
+Plug 'https://github.com/vim-syntastic/syntastic'
+Plug 'https://github.com/SirVer/ultisnips'
+Plug 'fatih/vim-go'
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-surround'
+Plug 'flazz/vim-colorschemes'
+Plug 'https://github.com/rakr/vim-one'
+Plug 'Chiel92/vim-autoformat'
+Plug 'cazador481/fakeclip.neovim'
+Plug 'arakashic/chromatica.nvim'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
+Plug 'OmniSharp/omnisharp-vim.git'
+Plug 'bogado/file-line'
+Plug 'davidhalter/jedi-vim'
+" Initialize plugin system
+call plug#end()
+
 " Required:
 filetype plugin indent on
 syntax enable
