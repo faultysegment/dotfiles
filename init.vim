@@ -13,24 +13,22 @@ set hls
 syntax on
 filetype indent plugin on
 
-"dein Scripts
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-Plug 'gmarik/Vundle.vim'
-  " Add or remove your plugins here:
-Plug 'Valloric/YouCompleteMe'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+" (Optional) Multi-entry selection UI.
+Plug 'Shougo/denite.nvim'
+" (Optional) Completion integration with deoplete.
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" (Optional) Completion integration with nvim-completion-manager.
+Plug 'roxma/nvim-completion-manager'
+" (Optional) Showing function signature and inline doc.
+
+Plug 'Shougo/echodoc.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
 Plug 'https://github.com/vim-syntastic/syntastic'
 Plug 'https://github.com/SirVer/ultisnips'
-Plug 'fatih/vim-go'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-surround'
 Plug 'flazz/vim-colorschemes'
@@ -40,15 +38,35 @@ Plug 'cazador481/fakeclip.neovim'
 Plug 'arakashic/chromatica.nvim'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
-Plug 'OmniSharp/omnisharp-vim.git'
 Plug 'bogado/file-line'
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+Plug 'zchee/deoplete-go', { 'do': 'make', 'for': 'go'}
+
 " Initialize plugin system
 call plug#end()
 
 " Required:
 filetype plugin indent on
 syntax enable
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \'cpp': ['clangd'],
+    \'go' : ['go-langserver'],
+    \'python' : ['pyls']
+    \ }
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> <F3> :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> <F7> :call LanguageClient_textDocument_documentSymbol()<CR>:lop<CR>
+nmap <F8> :TagbarToggle<CR>
 
 " ---------------------------------- "
 " Configure NERDTree
@@ -70,29 +88,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 au BufWrite *cpp,*h :Autoformat
-
-"use goimports for formatting
-let g:go_fmt_command = "gofmt"
-
-" turn highlighting on
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
-
-" Goto definition with F3
-" Call YCM GoTo or vim-go GoTo depending on file type.
-function! GoToDef()
-	if &ft == 'go'
-		execute 'GoDef'
-	else
- 		execute 'YcmCompleter GoTo'
-	endif
-endfunction
-nnoremap <F3> :call GoToDef()<CR>
 
 set tags+=./tags
 set colorcolumn=80
@@ -117,7 +112,6 @@ function TabToggle()
 endfunction
 set pastetoggle=<F10>
 map <F9> mz:execute TabToggle()<CR>'z
-nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_go = {
 			\ 'ctagstype' : 'go',
 			\ 'kinds'     : [
