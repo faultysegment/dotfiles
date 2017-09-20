@@ -39,9 +39,6 @@ Plug 'arakashic/chromatica.nvim'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'bogado/file-line'
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-Plug 'zchee/deoplete-go', { 'do': 'make', 'for': 'go'}
 
 " Initialize plugin system
 call plug#end()
