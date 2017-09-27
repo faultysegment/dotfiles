@@ -11,5 +11,6 @@ then
         exit 1
     fi
 fi
-python ./install.py
-pip install python-language-server
+python3 ./install.py
+pip3 install neovim
+pip3 install python-language-server
