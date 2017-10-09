@@ -24,6 +24,6 @@ then
     fi
 fi
 python3 ./install.py
-pip3 install python-language-server
-pip2 install neovim
-pip3 install neovim
+pip3 install --user python-language-server
+pip2 install --user neovim
+pip3 install --user neovim

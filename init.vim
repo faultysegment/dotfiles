@@ -40,6 +40,10 @@ Plug 'arakashic/chromatica.nvim'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'bogado/file-line'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd server && xbuild' }
+Plug 'https://gitlab.com/mixedCase/deoplete-omnisharp.git'
 
 " Initialize plugin system
 call plug#end()
