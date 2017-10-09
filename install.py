@@ -26,7 +26,10 @@ def update_config_files():
     for config_path, configs in CONFIG_FILES.items():
         for config in configs:
             old_path = os.path.join(config_path, config)
-            if not filecmp.cmp(config, old_path):
+            if not os.path.isfile(old_path):
+                print("{} not found, creating".format(config))
+                shutil.copyfile(config, old_path)
+            elif not filecmp.cmp(config, old_path):
                 question = "".join(("Found changes in ", config, "\n",
                                     "Do you want to replace it?(y/n)\n"))
                 if ask(question):
