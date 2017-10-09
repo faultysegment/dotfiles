@@ -22,6 +22,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " (Optional) Completion integration with nvim-completion-manager.
 Plug 'roxma/nvim-completion-manager'
 " (Optional) Showing function signature and inline doc.
+Plug 'zchee/deoplete-clang'
 
 Plug 'Shougo/echodoc.vim'
 Plug 'scrooloose/nerdtree'
