@@ -8,9 +8,6 @@ CONFIG_FILES = {
     HOME_DIR: HOME_FILES,
     os.path.join(HOME_DIR, ".config/nvim"): ("init.vim",)
 }
-LOCAL_CONFIG_FILES = [os.path.join(HOME_DIR, '{}local'.format(file))
-                      for file in HOME_FILES] + \
-    [os.path.join(HOME_DIR, ".config/nvim/init.vim.local"), ]
 
 
 def ask(string):
@@ -36,13 +33,5 @@ def update_config_files():
                     shutil.copyfile(config, old_path)
 
 
-def create_local_files():
-    for config in LOCAL_CONFIG_FILES:
-        if not os.path.isfile(config):
-            print("{} not found, creating default".format(config))
-            open(config, "a").close()
-
-
 if __name__ == "__main__":
     update_config_files()
-    create_local_files()
