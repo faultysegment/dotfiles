@@ -12,18 +12,4 @@ then
         exit 1
     fi
 fi
-which clang
-if [ $? -ne 0 ]
-then
-    echo "Need to install Clang"
-    if [ check_ubuntu -eq 0 ]
-    then
-        apt-get install clang
-    else
-        exit 1
-    fi
-fi
 python3 ./install.py
-pip3 install --user python-language-server
-pip2 install --user neovim
-pip3 install --user neovim

@@ -6,7 +6,6 @@ HOME_DIR = os.path.expanduser('~')
 HOME_FILES = ('.tmux.conf', '.bashrc', '.vimrc')
 CONFIG_FILES = {
     HOME_DIR: HOME_FILES,
-    os.path.join(HOME_DIR, ".config/nvim"): ("init.vim",)
 }
 
 
