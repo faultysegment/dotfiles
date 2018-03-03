@@ -41,15 +41,18 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'sakhnik/nvim-gdb'
+Plug 'sbdchd/neoformat'
 
 call plug#end()
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['/home/i_skrypitsa/src/cquery/build/release/bin/cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "/tmp/cquery"}'],
-    \ 'c': ['/home/i_skrypitsa/src/cquery/build/release/bin/cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "/tmp/cquery"}'],
+    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "/tmp/cquery"}'],
+    \ 'c': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "/tmp/cquery"}'],
     \ } 
 
 let g:LanguageClient_settingsPath = '/home/i_skrypitsa/.config/nvim/settings.json'
 let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings 
+
+
 
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
