@@ -123,6 +123,7 @@ function! Find(name)
 	execute ":e ".l:line
 endfunction
 command! -nargs=1 Find :call Find("<args>")
+command! -nargs=1 -complete=file Startdebug :GdbStart gdb -q -f <args>
 
 function! DoPrettyXML()
 	" save the filetype so we can restore it later
