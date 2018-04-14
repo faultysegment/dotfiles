@@ -181,3 +181,4 @@ nmap <F8> :TagbarToggle<CR>
 colorscheme one
 set background=dark
 let g:airline_theme='one'
+set guicursor=
