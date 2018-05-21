@@ -45,8 +45,9 @@ Plug 'sbdchd/neoformat'
 
 call plug#end()
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "/tmp/cquery"}'],
-    \ 'c': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "/tmp/cquery"}'],
+    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "./.cquerydir"}'],
+    \ 'c': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "./.cquerydir"}'],
+    \ 'python': ['pyls', '-v'],
     \ } 
 
 let g:LanguageClient_settingsPath = '/home/i_skrypitsa/.config/nvim/settings.json'
