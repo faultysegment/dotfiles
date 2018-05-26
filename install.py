@@ -2,6 +2,7 @@
 import filecmp
 import os.path
 import shutil
+import requests
 
 HOME_DIR = os.path.expanduser('~')
 HOME_FILES = ('.tmux.conf', '.bashrc', '.vimrc')
@@ -9,6 +10,9 @@ CONFIG_FILES = {
     HOME_DIR: HOME_FILES,
     os.path.join(HOME_DIR, '.config', 'nvim'): ('init.vim',),
 }
+BASH_GIT_URL = \
+    'https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh'
+BASH_GIT_PATH = os.path.join(HOME_DIR, '.bash_git')
 
 
 def ask(string):
@@ -34,5 +38,15 @@ def update_config_files():
                     shutil.copyfile(config, old_path)
 
 
-if __name__ == "__main__":
+def install_bash_git():
+    if not os.path.isfile(BASH_GIT_PATH):
+        r = requests.get(BASH_GIT_URL)
+        if r.status_code != 200:
+            raise RuntimeError("Unable to download .bash_git")
+        with open(BASH_GIT_PATH, 'a') as bashgit:
+            bashgit.write(r.text)
+
+
+if __name__ == '__main__':
+    install_bash_git()
     update_config_files()
