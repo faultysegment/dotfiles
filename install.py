@@ -27,6 +27,8 @@ def ask(string):
 def update_config_files():
     for config_path, configs in CONFIG_FILES.items():
         for config in configs:
+            if not os.path.exists(config_path):
+                os.makedirs(config_path)
             old_path = os.path.join(config_path, config)
             if not os.path.isfile(old_path):
                 print("{} not found, creating".format(config))
