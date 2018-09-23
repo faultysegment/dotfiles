@@ -21,10 +21,12 @@ syntax enable
 set hidden
 
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'Shougo/neocomplcache'        " Depenency for Shougo/neosnippet
+Plug 'godlygeek/tabular'           " This must come before plasticboy/vim-markdown
+Plug 'tpope/vim-rhubarb'           " Depenency for tpope/fugitive
 Plug 'majutsushi/tagbar'          " Class/module browser
 Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/vim-syntastic/syntastic'
-Plug 'https://github.com/SirVer/ultisnips'
 Plug 'bling/vim-airline'       " Lean & mean status/tabline for vim
 Plug 'tpope/vim-surround' "Parentheses, brackets, quotes, XML tags, and more
 Plug 'flazz/vim-colorschemes'
@@ -39,9 +41,15 @@ Plug 'junegunn/fzf'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'sakhnik/nvim-gdb'
 Plug 'sbdchd/neoformat'
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' } " Go auto completion
+Plug 'fatih/vim-go'                            " Go support
+Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'  " Default snippets for many languages
+Plug 'tpope/vim-fugitive'
+
 
 call plug#end()
 let g:LanguageClient_serverCommands = {
@@ -53,6 +61,78 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_settingsPath = '/home/i_skrypitsa/.config/nvim/settings.json'
 let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings 
 
+" Run goimports when running gofmt
+let g:go_fmt_command = "goimports"
+
+" Set neosnippet as snippet engine
+let g:go_snippet_engine = "neosnippet"
+
+" Enable syntax highlighting per default
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+
+" Show the progress when running :GoCoverage
+let g:go_echo_command_info = 1
+
+" Show type information
+let g:go_auto_type_info = 1
+
+" Highlight variable uses
+let g:go_auto_sameids = 1
+
+" Fix for location list when vim-go is used together with Syntastic
+let g:go_list_type = "quickfix"
+
+" Add the failing test name to the output of :GoTest
+let g:go_test_show_name = 1
+
+" gometalinter configuration
+let g:go_metalinter_command = ""
+let g:go_metalinter_deadline = "5s"
+let g:go_metalinter_enabled = [
+    \ 'deadcode',
+    \ 'gas',
+    \ 'goconst',
+    \ 'gocyclo',
+    \ 'golint',
+    \ 'gosimple',
+    \ 'ineffassign',
+    \ 'vet',
+    \ 'vetshadow'
+\]
+
+" Set whether the JSON tags should be snakecase or camelcase.
+let g:go_addtags_transform = "snakecase"
+
+" neomake configuration for Go.
+let g:neomake_go_enabled_makers = [ 'go', 'gometalinter' ]
+let g:neomake_go_gometalinter_maker = {
+  \ 'args': [
+  \   '--tests',
+  \   '--enable-gc',
+  \   '--concurrency=3',
+  \   '--fast',
+  \   '-D', 'aligncheck',
+  \   '-D', 'dupl',
+  \   '-D', 'gocyclo',
+  \   '-D', 'gotype',
+  \   '-E', 'misspell',
+  \   '-E', 'unused',
+  \   '%:p:h',
+  \ ],
+  \ 'append_file': 0,
+  \ 'errorformat':
+  \   '%E%f:%l:%c:%trror: %m,' .
+  \   '%W%f:%l:%c:%tarning: %m,' .
+  \   '%E%f:%l::%trror: %m,' .
+  \   '%W%f:%l::%tarning: %m'
+  \ }
 
 
 set completefunc=LanguageClient#complete
@@ -179,6 +259,36 @@ if (empty($TMUX))
   endif
 endif
 nmap <F8> :TagbarToggle<CR>
+" Language: Go
+" Tagbar configuration for Golang
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
 colorscheme one
 set background=dark
 let g:airline_theme='one'
