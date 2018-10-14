@@ -1,0 +1,27 @@
+[DownloadDialog Settings]
+Height 1080=502
+Width 1920=700
+
+[FileLocation]
+scrollbackUseCacheLocation=true
+scrollbackUseSystemLocation=false
+
+[KFileDialog Settings]
+Recent Files[$e]=konsole-with-palette-colours.css,file:$HOME/.local/konsole-with-palette-colours.css
+Recent URLs[$e]=file:$HOME/.local/
+
+[KonsoleWindow]
+ShowMenuBarByDefault=false
+ShowWindowTitleOnTitleBar=true
+
+[MainWindow]
+Height 1080=1055
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAAAAB0YAAAQfAAAABAAAAAQAAAAIAAAACPwAAAAA
+Width 1920=927
+Window-Maximized 1080x1920=true
+
+[TabBar]
+TabBarUseUserStyleSheet=true
+TabBarUserStyleSheetFile[$e]=file://${HOME}/.local/konsole-with-palette-colours.css
+TabBarVisibility=AlwaysShowTabBar
