@@ -6,7 +6,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'bling/vim-airline'     " Lean & mean status/tabline for vim
   Plug 'tpope/vim-surround' "Parentheses, brackets, quotes, XML tags, and more
   Plug 'tpope/vim-fugitive' " Git
+  Plug 'Shougo/denite.nvim'
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
   " Autocompletion
   Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
@@ -14,8 +16,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     \ }
   Plug 'Shougo/deoplete.nvim'
   " Go support
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-  Plug 'zchee/deoplete-go', { 'do': 'make'}
 
   " C/C++ debugger
   Plug 'dbgx/lldb.nvim'
@@ -27,11 +27,12 @@ call plug#end()
 set clipboard=
 set mouse=a
 set nu
-set smartindent
+set autoindent
+set noexpandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-set expandtab
+set noexpandtab
 set noswapfile
 set list
 set listchars=trail:.,tab:>>
@@ -57,6 +58,9 @@ endif
 set pastetoggle=<F10>
 set guicursor=
 
+let g:python2_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 colorscheme onedark
 let g:airline_theme='onedark'
 
@@ -65,18 +69,22 @@ let g:LanguageClient_serverCommands = {
   \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "./.cquerydir"}'],
   \ 'c': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "./.cquerydir"}'],
   \ 'python': ['pyls', '-v'],
+  \ 'go': ['go-langserver', '-gocodecompletion']
   \ } 
 
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
-nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
+" Or map each action separately
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
 nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 let g:deoplete#enable_at_startup = 1
+let g:go_fmt_command = "goimports"
 
 " allow toggling between local and default mode
 function TabToggle()
