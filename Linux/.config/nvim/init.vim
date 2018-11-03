@@ -2,21 +2,18 @@ set nocompatible              " be iMproved, required
 
 " Plugins section
 call plug#begin('~/.local/share/nvim/plugged')
-  Plug 'majutsushi/tagbar'      " Class/module browser
   Plug 'bling/vim-airline'     " Lean & mean status/tabline for vim
   Plug 'tpope/vim-surround' "Parentheses, brackets, quotes, XML tags, and more
   Plug 'tpope/vim-fugitive' " Git
+  Plug 'Shougo/denite.nvim'
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  " Autocompletion
+
+ " Autocompletion
   Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
   Plug 'Shougo/deoplete.nvim'
-  " Go support
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-  Plug 'zchee/deoplete-go', { 'do': 'make'}
-
   " C/C++ debugger
   Plug 'dbgx/lldb.nvim'
   " Theme
@@ -65,11 +62,13 @@ let g:LanguageClient_serverCommands = {
   \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "./.cquerydir"}'],
   \ 'c': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "./.cquerydir"}'],
   \ 'python': ['pyls', '-v'],
+  \ 'go': ['go-langserver', '-gocodecompletion']
   \ } 
 
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
@@ -100,5 +99,3 @@ nmap <silent> <A-Right> :wincmd l<CR>
 
 " Open NERDTree with Ctrl-n 
 map <C-n> :NERDTreeToggle<CR>
-
-nmap <F8> :TagbarToggle<CR>
