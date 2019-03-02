@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    "CoenraadS.bracket-pair-colorizer",
+    "eamodio.gitlens",
+    "Equinusocio.vsc-material-theme",
+    "eriklynd.json-tools",
+    "fabiospampinato.vscode-commands",
+    "Gruntfuggly.activitusbar",
+    "Gruntfuggly.todo-tree",
+    "ifaxity.onedark",
+    "mechatroner.rainbow-csv",
+    "mohsen1.prettify-json",
+    "ms-python.python",
+    "ms-vscode.cpptools",
+    "ms-vscode.Go",
+    "PeterJausovec.vscode-docker",
+    "rust-lang.rust",
+    "vscodevim.vim"
+  ]
+}

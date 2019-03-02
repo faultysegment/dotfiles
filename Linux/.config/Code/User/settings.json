@@ -1,0 +1,42 @@
+{
+    "commands.commands": [
+        {
+            "alignment": "left", // Should the item be placed to the left or right?
+            "priority": 0, // The priority of this item. Higher value means the item should be shown more to the left
+            "text": "$(terminal)",
+            "command": "workbench.action.terminal.focus",
+            "tooltip": "Focus to terminal"
+        },
+    ],
+    "git.autofetch": true,
+    "window.zoomLevel": 1,
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "all",
+    "editor.renderControlCharacters": true,
+    "breadcrumbs.enabled": true,
+    "editor.tabSize": 2,
+    "workbench.editor.highlightModifiedTabs": true,
+    "go.autocompleteUnimportedPackages": true,
+    "go.lintTool": "golangci-lint",
+    "editor.rulers": [
+        120
+    ],
+    "search.location": "panel",
+    "terminal.external.osxExec": "iTerm.app",
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "merge-conflict.autoNavigateNextConflict.enabled": true,
+    "workbench.colorTheme": "OneDark++",
+    "workbench.activityBar.visible": false,
+    "activitusbar.views": {
+        "explorer": "file-text",
+        "search": "search",
+        "extension.gitlens": "git-merge",
+        "extension.todo-tree-container": "list-ordered",
+        "scm": "",
+        "debug": "bug",
+        "extensions": "package",
+    },
+    "todo-tree.expanded": true,
+    "window.menuBarVisibility": "default",
+}
