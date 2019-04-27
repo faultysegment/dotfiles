@@ -7,13 +7,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-fugitive' " Git
   Plug 'Shougo/denite.nvim'
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
  " Autocompletion
-  Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-  Plug 'Shougo/deoplete.nvim'
+  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install({'tag':1})}}
+  Plug 'w0rp/ale'
   " C/C++ debugger
   Plug 'dbgx/lldb.nvim'
   " Theme
@@ -57,26 +53,6 @@ set guicursor=
 colorscheme onedark
 let g:airline_theme='onedark'
 
-" LanguageClient Settings
-let g:LanguageClient_serverCommands = {
-  \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "./.cquerydir"}'],
-  \ 'c': ['cquery', '--log-file=/tmp/cq.log', '--init={"enableComments": 2, "cacheDirectory": "./.cquerydir"}'],
-  \ 'python': ['pyls', '-v'],
-  \ 'go': ['go-langserver', '-gocodecompletion']
-  \ } 
-
-set completefunc=LanguageClient#complete
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
-nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-let g:deoplete#enable_at_startup = 1
-
 " allow toggling between local and default mode
 function TabToggle()
   if &expandtab
@@ -91,11 +67,9 @@ function TabToggle()
 endfunction
 
 " Key mapping
-map <F9> mz:execute TabToggle()<CR>'z
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
-
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <F2> <Plug>(coc-rename)
+map <F8> mz:execute TabToggle()<CR>'z
 " Open NERDTree with Ctrl-n 
 map <C-n> :NERDTreeToggle<CR>
