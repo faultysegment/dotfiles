@@ -8,10 +8,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Shougo/denite.nvim'
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
  " Autocompletion
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install({'tag':1})}}
   Plug 'w0rp/ale'
-  " C/C++ debugger
-  Plug 'dbgx/lldb.nvim'
   " Theme
   Plug 'joshdick/onedark.vim'
 call plug#end()
@@ -67,9 +64,6 @@ function TabToggle()
 endfunction
 
 " Key mapping
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <F2> <Plug>(coc-rename)
 map <F8> mz:execute TabToggle()<CR>'z
 " Open NERDTree with Ctrl-n 
 map <C-n> :NERDTreeToggle<CR>
