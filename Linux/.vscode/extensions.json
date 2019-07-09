@@ -13,7 +13,6 @@
     "ms-python.python",
     "ms-vscode.cpptools",
     "ms-vscode.Go",
-    "PeterJausovec.vscode-docker",
     "rust-lang.rust",
     "vscodevim.vim"
   ]
