@@ -7,8 +7,14 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-fugitive' " Git
   Plug 'Shougo/denite.nvim'
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
- " Autocompletion
-  Plug 'w0rp/ale'
+  " Autocompletion
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-go', { 'do': 'make' }
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#sources#go = ['vim-go']
+
+  " Go
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   " Theme
   Plug 'joshdick/onedark.vim'
 call plug#end()
