@@ -9,9 +9,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   " Autocompletion
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'zchee/deoplete-go', { 'do': 'make' }
   let g:deoplete#enable_at_startup = 1
-  let g:deoplete#sources#go = ['vim-go']
+
 
   " Go
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -73,3 +72,7 @@ endfunction
 map <F8> mz:execute TabToggle()<CR>'z
 " Open NERDTree with Ctrl-n 
 map <C-n> :NERDTreeToggle<CR>
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+au filetype go inoremap <buffer> . .<C-x><C-o>
+
