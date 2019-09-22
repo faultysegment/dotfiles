@@ -7,13 +7,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-fugitive' " Git
   Plug 'Shougo/denite.nvim'
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'liuchengxu/vista.vim'
+  Plug 'dense-analysis/ale'
   " Autocompletion
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'fatih/vim-go'
 
-
-  " Go
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   " Theme
   Plug 'joshdick/onedark.vim'
 call plug#end()
@@ -72,7 +71,16 @@ endfunction
 map <F8> mz:execute TabToggle()<CR>'z
 " Open NERDTree with Ctrl-n 
 map <C-n> :NERDTreeToggle<CR>
-let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1
-au filetype go inoremap <buffer> . .<C-x><C-o>
 
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" vim-go
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
