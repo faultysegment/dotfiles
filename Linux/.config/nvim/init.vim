@@ -2,7 +2,7 @@ set nocompatible              " be iMproved, required
 
 " Plugins section
 call plug#begin('~/.local/share/nvim/plugged')
-  Plug 'bling/vim-airline'     " Lean & mean status/tabline for vim
+  Plug 'itchyny/lightline.vim'
   Plug 'tpope/vim-surround' "Parentheses, brackets, quotes, XML tags, and more
   Plug 'tpope/vim-fugitive' " Git
   Plug 'Shougo/denite.nvim'
@@ -69,6 +69,7 @@ endfunction
 
 " Key mapping
 map <F8> mz:execute TabToggle()<CR>'z
+map <F9> :Vista!!<CR>
 " Open NERDTree with Ctrl-n 
 map <C-n> :NERDTreeToggle<CR>
 
@@ -77,6 +78,57 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Vista settings
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista#renderer#enable_icon = 1
+let g:vista_executive_for = {
+  \ 'go': 'coc',
+  \ }
+function! NearestMethodOrFunction() abort
+    return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'filename', 'readonly', 'modified', 'method' ] ]
+      \ },
+      \ 'component_function': {
+      \   'method': 'NearestMethodOrFunction',
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+
+
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc 
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 " vim-go
 " disable vim-go :GoDef short cut (gd)
