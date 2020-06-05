@@ -2,18 +2,21 @@ set nocompatible              " be iMproved, required
 
 " Plugins section
 call plug#begin('~/.local/share/nvim/plugged')
-  Plug 'itchyny/lightline.vim'
   Plug 'tpope/vim-surround' "Parentheses, brackets, quotes, XML tags, and more
+ 
   Plug 'tpope/vim-fugitive' " Git
+  
   Plug 'Shougo/denite.nvim'
+
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   Plug 'liuchengxu/vista.vim'
+
   Plug 'dense-analysis/ale'
+  Plug 'itchyny/lightline.vim'
   " Autocompletion
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'fatih/vim-go'
-
   " Theme
+  Plug 'rakr/vim-one'
   Plug 'joshdick/onedark.vim'
 call plug#end()
 
@@ -51,8 +54,9 @@ endif
 set pastetoggle=<F10>
 set guicursor=
 
-colorscheme onedark
-let g:airline_theme='onedark'
+colorscheme one
+set background=dark
+let g:airline_theme='one'
 
 " allow toggling between local and default mode
 function TabToggle()
@@ -78,6 +82,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <F7> :call CocAction('runCommand', 'editor.action.organizeImport')<CR>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -104,10 +109,23 @@ nmap <leader>f  <Plug>(coc-format-selected)
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista#renderer#enable_icon = 1
 let g:vista_executive_for = {
-  \ 'go': 'coc',
+  \ 'go': 'ctags',
   \ }
 function! NearestMethodOrFunction() abort
     return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, 'W' . info['warning'])
+  endif
+  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
 endfunction
 
 " Lightline
@@ -115,14 +133,17 @@ let g:lightline = {
       \ 'colorscheme': 'one',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'filename', 'readonly', 'modified', 'method' ] ]
+      \             [ 'gitbranch', 'filename', 'readonly', 'modified', 'method' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'cocstatus' ],
+      \              [ 'fileformat', 'fileencoding' ] ]
       \ },
       \ 'component_function': {
       \   'method': 'NearestMethodOrFunction',
-      \   'gitbranch': 'FugitiveHead'
+      \   'gitbranch': 'FugitiveHead',
+      \   'cocstatus': 'StatusDiagnostic'
       \ },
       \ }
-
 
 " By default vista.vim never run if you don't call it explicitly.
 "
