@@ -82,6 +82,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
+nmap <silent> <Leader>k <Plug>(coc-diagnostic-prev-error)
+
 nmap <F7> :call CocAction('runCommand', 'editor.action.organizeImport')<CR>
 
 " Use K to show documentation in preview window
