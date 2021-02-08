@@ -13,11 +13,13 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'dense-analysis/ale'
   Plug 'itchyny/lightline.vim'
-  " Autocompletion
+  " Auto completion
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Theme
   Plug 'rakr/vim-one'
   Plug 'joshdick/onedark.vim'
+
+  Plug 'ekalinin/Dockerfile.vim'
 call plug#end()
 
 "Generic settings
@@ -33,9 +35,15 @@ set noswapfile
 set list
 set listchars=trail:.,tab:>>
 set hls
+
 filetype on
 filetype plugin indent on
 syntax enable
+
+set spell
+" spell languages
+set spelllang=en,cjk
+
 " Required for operations modifying multiple buffers like rename.
 set hidden
 set tags+=./tags
