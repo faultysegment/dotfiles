@@ -130,7 +130,7 @@ alias ssh_socks_proxy='ssh -D 8888  -f -N'
 alias tmux="env TERM=screen-256color tmux"
 alias git_sync_with_upstream="git fetch upstream && git checkout master && git merge upstream/master"
 #Terminal command prompt
-PROMPT_COMMAND='WIP=""; if [ $(git log --oneline 2>/dev/null| head -n 1 | grep WIP | wc -l) -eq 1 ]; then WIP="(WIP)"; fi; PS1BRANCH=$(__git_ps1)$WIP;  if [ ${#PS1BRANCH} -ge 1 ]; then PS1X=$(basename `git rev-parse --show-toplevel`)$PS1BRANCH; else PS1X=$(p="${PWD#${HOME}}"; [ "${PWD}" != "${p}" ] && printf "~";IFS=/; for q in ${p:1}; do printf /${q:0:1}; done; printf "${q:1}"); fi'
+PROMPT_COMMAND='WIP=""; if [ $(git log --oneline 2>/dev/null| head -n 1 | grep WIP | wc -l) -eq 1 ]; then WIP="(WIP)"; fi; PS1BRANCH=$(__git_ps1)$WIP;  if [ ${#PS1BRANCH} -ge 1 ]; then DELIM="|"; PS1X=$(basename `git rev-parse --show-toplevel`)$PS1BRANCH$DELIM${PWD##*/}; else PS1X=$(p="${PWD#${HOME}}"; [ "${PWD}" != "${p}" ] && printf "~";IFS=/; for q in ${p:1}; do printf /${q:0:1}; done; printf "${q:1}"); fi'
 PS1='`if [ \$? = 0 ]; then echo \[\e[33m\]; else echo \[\e[31m\]; fi`\t-\[\033[1;31m\]\u\[\033[1;33m\]@\[\033[1;32m\]\h\[\033[0m\]:\[\e[1;34m\]${PS1X}:\[\e[0m\] '
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
