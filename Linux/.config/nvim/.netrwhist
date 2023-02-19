@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/ilyaskrypitsa/src/a8r/.local/configs'
+let g:netrw_dirhist_1='/home/ilyaskrypitsa/go/src/github.com/birdayz/kaf/cmd/kaf'
+let g:netrw_dirhist_0='/home/ilyaskrypitsa/go/src/github.com/birdayz/kaf/cmd'
+let g:netrw_dirhist_9='/home/ilyaskrypitsa/go/src/github.com/birdayz/kaf'
+let g:netrw_dirhist_8='/home/ilyaskrypitsa/go/src/github.com/birdayz/kaf/cmd/kaf'
+let g:netrw_dirhist_7='/home/ilyaskrypitsa/go/src/github.com/birdayz/kaf/cmd'
+let g:netrw_dirhist_6='/home/ilyaskrypitsa/go/src/github.com/birdayz/kaf'
+let g:netrw_dirhist_5='/home/ilyaskrypitsa/.ssh'
+let g:netrw_dirhist_4='/home/ilyaskrypitsa/src/a8r/internal/export/consistency'
+let g:netrw_dirhist_3='/home/ilyaskrypitsa/src/a8r/.local/configs'
