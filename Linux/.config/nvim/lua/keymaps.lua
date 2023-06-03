@@ -19,10 +19,10 @@ end
 
 nmap('<C-n>', ':NvimTreeToggle<CR>')
 
-nmap('<Leader>e', 'vim.diagnostic.open_float')
-nmap('[d', 'vim.diagnostic.goto_prev')
-nmap(']d', 'vim.diagnostic.goto_next')
-nmap('<Leader>q', 'vim.diagnostic.setloclist')
+nmap('<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>')
+nmap('[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+nmap(']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+nmap('<leader>dd', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
